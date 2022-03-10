@@ -1,14 +1,18 @@
 # justrequire
 
+just require `.ts` and `ESM` js file as require
+
 ## Usage
 
 ```js
-const justrequire = require('justrequire');
+const justrequire = require('./index.js');
 
-// if a ts file, require a ts file just like require
-const x = justrequire('./some/x.ts');
-// or process by origin require
-const y = justrequire('module');
+const ret = justrequire('./test.ts');
+console.log(ret);
+
+const chalkesm = justrequire('chalk');
+
+console.log(chalkesm);
 ```
 
 ## How

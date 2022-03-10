@@ -1,5 +1,8 @@
-const tsr = require('./index.js');
+const justrequire = require('./index.js');
 
-const ret = tsr('./test.ts')
+const ret = justrequire('./test.ts');
+console.log(ret);
 
-console.log(ret)
+const chalkesm = justrequire('chalk');
+
+console.log(chalkesm);

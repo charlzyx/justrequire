@@ -1,20 +1,29 @@
 var path = require('path');
 var fs = require('fs');
 
-function requirets (moduleName, pathPrefix) {
+function justrequire (moduleName, pathPrefix) {
   var prefix = pathPrefix || process.cwd()
 
-  if (!/\.(ts|js)$/.test(moduleName)) return require(moduleName);
+  if (/\.json$/.test(moduleName)) return require(moduleName);
 
   try {
     var filename = require.resolve(moduleName);
 
-    var jsFilename = filename.replace(/\.ts$/, '__requirets__.js');
+    var jsFilename = filename.replace(/\.(ts|tsx|cts|mts|js|cjs|mjs)$/, '__requirets__.cjs');
+
+    // console.log('------------------------------------');
+    // console.log('--require.resolve("'+moduleName+'");')
+    // console.log(filename);
+    // console.log('------------------------------------');
+    // console.log(jsFilename);
+    // console.log('------------------------------------');
+
 
     require('esbuild').buildSync({
       entryPoints: [filename],
       bundle: true,
       platform: 'node',
+      format: "cjs",
       outfile: jsFilename,
     });
 
@@ -25,21 +34,31 @@ function requirets (moduleName, pathPrefix) {
     return ret;
 
   } catch (_) {
-
     var filename = path.isAbsolute(moduleName)
       ? moduleName
       : path.resolve(prefix, moduleName);
 
     var exist = fs.existsSync(filename);
 
-    if (!exist) throw new Error(`requirets module ${moduleName} not exist`);
+    // console.log('------------------------------------');
+    // console.log('--path.resolve----');
+    // console.log('------------------------------------');
+    // console.log(filename);
+    // console.log('------------------------------------');
+    // console.log(jsFilename);
+    // console.log('------------------------------------');
 
-    var jsFilename = filename.replace(/\.(ts|tsx)$/, '__requirets__.js');
+
+
+    if (!exist) throw new Error(`justrequire module ${moduleName} not exist`);
+    
+    var jsFilename = filename.replace(/\.(ts|tsx|cts|mts|js|cjs|mjs)$/, '__requirets__.cjs');
 
     require('esbuild').buildSync({
       entryPoints: [filename],
       bundle: true,
       platform: 'node',
+      format: "cjs",
       outfile: jsFilename,
     });
 
@@ -51,4 +70,4 @@ function requirets (moduleName, pathPrefix) {
   }
 }
 
-module.exports = requirets;
+module.exports = justrequire;

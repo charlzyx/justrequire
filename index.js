@@ -1,10 +1,10 @@
 var path = require('path');
 var fs = require('fs');
 
-function requirets ( moduleName, pathPrefix) {
+function requirets (moduleName, pathPrefix) {
   var prefix = pathPrefix || process.cwd()
 
-  if (!/\.ts$/.test(moduleName)) return require(moduleName);
+  if (!/\.(ts|js)$/.test(moduleName)) return require(moduleName);
 
   try {
     var filename = require.resolve(moduleName);

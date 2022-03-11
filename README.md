@@ -1,11 +1,11 @@
 # justrequire
 
-just require `.ts` and `ESM` js file as require
+just require `.ts` or `ESM` format js file as `require()`
 
 ## Usage
 
 ```js
-const justrequire = require('./index.js');
+const justrequire = require('justrequire');
 
 const ret = justrequire('./test.ts');
 console.log(ret);
@@ -77,7 +77,7 @@ function justrequire (moduleName, pathPrefix) {
 
 
     if (!exist) throw new Error(`justrequire module ${moduleName} not exist`);
-    
+
     var jsFilename = filename.replace(/\.(ts|tsx|cts|mts|js|cjs|mjs)$/, '__requirets__.cjs');
 
     require('esbuild').buildSync({

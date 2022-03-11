@@ -1,8 +1,8 @@
 {
   "name": "justrequire",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
-  "types": "index.d.ts" ,
+  "types": "index.d.ts",
   "author": {
     "email": "charlzyx@qq.com",
     "name": "charlzyx"

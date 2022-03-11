@@ -13,7 +13,8 @@
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "dependencies": {
     "esbuild": "*"

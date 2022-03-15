@@ -22,6 +22,7 @@ function justrequire (moduleName, pathPrefix) {
     require('esbuild').buildSync({
       entryPoints: [filename],
       bundle: true,
+      external: ['/node_modules/*'],
       platform: 'node',
       format: "cjs",
       outfile: jsFilename,
@@ -51,13 +52,14 @@ function justrequire (moduleName, pathPrefix) {
 
 
     if (!exist) throw new Error(`justrequire module ${moduleName} not exist`);
-    
+
     var jsFilename = filename.replace(/\.(ts|tsx|cts|mts|js|cjs|mjs)$/, '__requirets__.cjs');
 
     require('esbuild').buildSync({
       entryPoints: [filename],
       bundle: true,
       platform: 'node',
+      external: ['/node_modules/*'],
       format: "cjs",
       outfile: jsFilename,
     });
